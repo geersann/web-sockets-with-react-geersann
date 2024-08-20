@@ -8,9 +8,11 @@ wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
 
+    const textMessage = Buffer.isBuffer(message) ? message.toString() : message;
+
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
-        client.send(message);
+        client.send(textMessage);
       }
     });
   });
@@ -18,5 +20,4 @@ wss.on('connection', function connection(ws) {
   ws.send('Welcome to the WebSocket server!');
 });
 
-// Do not remove this export. wss should be the name of you WebSocket Server instance
 module.exports = wss;

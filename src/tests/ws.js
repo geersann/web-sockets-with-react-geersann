@@ -1,6 +1,5 @@
 class WebSocket {
   constructor(url) {
-    // `onmessage` should be overwritten by the code using the socket.
     this._onmessage = () => {};
     this.onopen = () => {};
   }
